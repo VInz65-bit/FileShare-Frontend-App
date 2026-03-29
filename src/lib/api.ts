@@ -9,7 +9,7 @@ import type {
 } from "@/types";
 import { LocalFile } from "@/store/file-store";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
+const API_BASE = "/proxy";
 
 const api = axios.create({
   baseURL: API_BASE,
