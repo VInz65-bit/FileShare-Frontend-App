@@ -29,18 +29,12 @@ export default function HomePage() {
 
       <div className="flex flex-col sm:flex-row gap-5 mt-12 w-full sm:w-auto">
         <Link
-          href="/register"
-          className="group relative px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)] hover:shadow-[0_0_60px_-15px_rgba(16,185,129,0.6)] flex items-center justify-center gap-2 overflow-hidden"
+          href="/dashboard"
+          className="group relative px-10 py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all shadow-[0_0_50px_-15px_rgba(16,185,129,0.5)] hover:shadow-[0_0_70px_-20px_rgba(16,185,129,0.7)] flex items-center justify-center gap-3 overflow-hidden transform hover:scale-105 active:scale-95"
         >
-          <span className="relative z-10 flex items-center gap-2">
-            Start Free Now <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          <span className="relative z-10 flex items-center gap-3 text-lg">
+            Open Vault Dashboard <HiArrowRight className="group-hover:translate-x-1.5 transition-transform" />
           </span>
-        </Link>
-        <Link
-          href="/login"
-          className="px-8 py-4 rounded-full backdrop-blur-md bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white font-semibold transition-all flex items-center justify-center"
-        >
-          Sign In
         </Link>
       </div>
 

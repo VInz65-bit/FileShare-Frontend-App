@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth-store";
@@ -13,6 +13,10 @@ export default function LoginPage() {
   const { login, loading } = useAuthStore();
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    router.replace("/dashboard");
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

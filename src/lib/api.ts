@@ -50,17 +50,6 @@ export async function loginUser(
   return res.data;
 }
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
-  }
-);
 
 
 // ─── Files ───────────────────────────────────────────────────
@@ -132,20 +121,3 @@ export async function getMyFiles(): Promise<FileDetailsDTO[]> {
 }
 
 
-api.interceptors.response.use(
-  (response) => response, 
-  (error) => {
-    
-    if (error.response && error.response.status === 401) {
-      console.warn("Token expired or invalid. Logging out...");
-
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-
-      if (typeof window !== "undefined") {
-        window.location.href = "/login";
-      }
-    }
-    return Promise.reject(error);
-  }
-);

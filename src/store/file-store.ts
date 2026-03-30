@@ -42,8 +42,9 @@ export const useFileStore = create<FileState>((set, get) => ({
     try {
       const data = await getMyFiles();
       set({ files: data, loading: false });
-    } catch (err: any) {
-      set({ error: "Failed to fetch files", loading: false });
+    } catch {
+      // stay silent and show empty list on error
+      set({ files: [], loading: false });
     }
   },
 

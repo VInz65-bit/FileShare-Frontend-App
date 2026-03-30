@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuthStore } from "@/store/auth-store";
 import { useFileStore } from "@/store/file-store";
 import { useToast } from "@/components/Toast";
 import FileCard from "@/components/FileCard";
 import UploadModal from "@/components/UploadModal";
-import { HiOutlinePlus, HiOutlineCloudUpload } from "react-icons/hi";
+import { HiOutlinePlus, HiOutlineCloudUpload, HiOutlineUsers } from "react-icons/hi";
 import type { FileUploadRequest } from "@/types";
 
 
@@ -16,21 +16,13 @@ export default function DashboardPage() {
 
   const { files, upload, update, remove, fetchFiles } = useFileStore();
   const { toast } = useToast();
-  const router = useRouter();
 
   const [uploadOpen, setUploadOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isHydrated) return;
-    if (isAuthenticated) {
-      fetchFiles();
-    } else {
-      router.push("/login");
-    }
-  }, [isAuthenticated, router, fetchFiles, isHydrated]);
-
-  if (!isAuthenticated) return null;
+    fetchFiles();
+  }, [fetchFiles]);
 
   const handleUpload = async (data: FileUploadRequest) => {
     try {
@@ -61,13 +53,6 @@ export default function DashboardPage() {
     }
   };
 
-  if (!isHydrated || !isAuthenticated) {
-    return (
-      <div className="flex items-center justify-center min-h-[calc(100vh-10rem)]">
-        <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin shadow-[0_0_15px_-3px_rgba(16,185,129,0.5)]" />
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-7xl mx-auto px-6 sm:px-8 py-12">
@@ -83,13 +68,22 @@ export default function DashboardPage() {
             Managing <span className="text-slate-300 font-semibold">{files.length}</span> secure file{files.length !== 1 && "s"} in your vault
           </p>
         </div>
-        <button
-          onClick={() => setUploadOpen(true)}
-          className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold transition-all shadow-[0_4px_20px_-5px_rgba(16,185,129,0.4)] hover:scale-105 cursor-pointer uppercase tracking-wider text-xs"
-        >
-          <HiOutlinePlus className="w-4 h-4" />
-          Upload New File
-        </button>
+        <div className="flex gap-3">
+          <Link
+            href="/register"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition-all border border-white/10 hover:border-emerald-500/30 cursor-pointer uppercase tracking-wider text-xs"
+          >
+            <HiOutlineUsers className="w-4 h-4 text-emerald-400" />
+            Manage Users
+          </Link>
+          <button
+            onClick={() => setUploadOpen(true)}
+            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold transition-all shadow-[0_4px_20px_-5px_rgba(16,185,129,0.4)] hover:scale-105 cursor-pointer uppercase tracking-wider text-xs"
+          >
+            <HiOutlinePlus className="w-4 h-4" />
+            Upload New File
+          </button>
+        </div>
       </div>
 
       {/* empty state */}

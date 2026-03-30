@@ -19,8 +19,8 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       await register({ username, email, password });
-      toast("Account created! Welcome aboard. 🚀", "success");
-      router.push("/login");
+      toast("User registered successfully! 🚀", "success");
+      router.push("/dashboard");
     } catch {
       toast("Registration failed — Username/Email might be taken.", "error");
     }
@@ -41,9 +41,9 @@ export default function RegisterPage() {
         </div>
 
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Create Account</h1>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Register New User</h1>
           <p className="text-slate-400 text-sm">
-            Join the most elegant file sharing platform
+            Add a new member to the vault system
           </p>
         </div>
 
@@ -93,16 +93,9 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full py-4 mt-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 text-sm font-bold tracking-wide uppercase transition-all shadow-[0_4px_20px_-5px_rgba(20,184,166,0.4)] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed hover:scale-[1.02]"
           >
-            {loading ? "Registering..." : "Create Account Securely"}
+            {loading ? "Registering..." : "Add User to Vault"}
           </button>
         </form>
-
-        <p className="mt-8 text-center text-sm text-slate-500">
-          Already have an account?{" "}
-          <Link href="/login" className="font-medium text-teal-400 hover:text-teal-300 hover:underline transition-all">
-            Sign In
-          </Link>
-        </p>
       </div>
     </div>
   );

@@ -23,12 +23,12 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  token: null,
-  username: null,
-  isAuthenticated: false,
+  token: "guest-token",
+  username: "Guest User",
+  isAuthenticated: true,
   loading: false,
   error: null,
-  isHydrated: false,
+  isHydrated: true,
 
   login: async (username, password) => {
     set({ loading: true, error: null });
