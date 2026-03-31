@@ -52,7 +52,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-3xl font-extrabold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">Vault Dashboard</h1>
           <p className="text-emerald-400 font-medium text-sm flex items-center gap-2">
-            Welcome back, {username} <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Welcome back  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           </p>
           <p className="text-slate-500 text-sm mt-2">
             Managing <span className="text-slate-300 font-semibold">{files.length}</span> secure file{files.length !== 1 && "s"} in your vault
@@ -64,7 +64,7 @@ export default function DashboardPage() {
             className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold transition-all shadow-[0_4px_20px_-5px_rgba(16,185,129,0.4)] hover:scale-105 cursor-pointer uppercase tracking-wider text-xs"
           >
             <HiOutlineCloudUpload className="w-4 h-4" />
-            File Upload
+             Save Student
           </Link>
 
         </div>
@@ -87,7 +87,7 @@ export default function DashboardPage() {
             className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold transition-colors border border-white/5 hover:border-emerald-500/30 cursor-pointer"
           >
             <HiOutlineCloudUpload className="w-4 h-4 text-emerald-400" />
-            Upload File
+            Upload Student Details
           </Link>
 
         </div>

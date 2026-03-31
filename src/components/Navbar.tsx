@@ -12,7 +12,7 @@ export default function Navbar() {
             <span className="text-slate-950 font-black text-xl tracking-tighter">F</span>
           </div>
           <span className="text-xl text-slate-100 tracking-tight">
-            <span className="font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-300">File</span>
+            <span className="font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-300">Student</span>
             <span className="font-light">Share</span>
           </span>
         </Link>
@@ -31,7 +31,7 @@ export default function Navbar() {
                 <span className="text-xs font-bold text-emerald-400">G</span>
               </div>
               <span className="text-sm font-medium text-slate-300">
-                Guest User
+                 Malik Bandara
               </span>
             </div>
           </div>

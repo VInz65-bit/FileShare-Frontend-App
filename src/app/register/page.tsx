@@ -41,47 +41,47 @@ export default function RegisterPage() {
         </div>
 
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Upload New File</h1>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Upload New Student Details</h1>
           <p className="text-slate-400 text-sm">
-            Add a new file entry to the secure vault
+            Add a new Student entry belong to the Files
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">File Name</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Student User Name</span>
             <input
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="e.g. project_draft.pdf"
+              placeholder="e.g. Malik123"
             />
           </label>
 
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">File Type / Category</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Student Email</span>
             <input
               required
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="e.g. Documentation"
+              placeholder="e.g. mmalith520@gmail.com"
             />
           </label>
 
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Download URL</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Password</span>
             <input
               required
               type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="https://files.example.com/d/..."
+              placeholder="Enter Password"
             />
-            <p className="text-[10px] text-slate-500 mt-1.5 ml-1">Securely share your file download location.</p>
+            <p className="text-[10px] text-slate-500 mt-1.5 ml-1">Securely enter password.</p>
           </label>
 
           <button
@@ -89,7 +89,7 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full py-4 mt-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 text-sm font-bold tracking-wide uppercase transition-all shadow-[0_4px_20px_-5px_rgba(20,184,166,0.4)] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed hover:scale-[1.02]"
           >
-            {loading ? "Uploading..." : "Save File to Vault"}
+            {loading ? "Uploading..." : "Save Student"}
           </button>
         </form>
       </div>
