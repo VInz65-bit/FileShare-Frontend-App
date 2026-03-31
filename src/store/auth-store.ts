@@ -9,7 +9,6 @@ interface JwtPayload {
 }
 
 interface AuthState {
-  token: string | null;
   username: string | null;
   isAuthenticated: boolean;
   loading: boolean;
@@ -23,8 +22,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  token: "guest-token",
-  username: "Guest User",
+  username: "guest-user",
   isAuthenticated: true,
   loading: false,
   error: null,
@@ -33,13 +31,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: async (username, password) => {
     set({ loading: true, error: null });
     try {
-      const res = await loginUser({ username, password });
-      const decoded = jwtDecode<JwtPayload>(res.token);
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("username", decoded.sub);
+      await loginUser({ username, password });
+      localStorage.setItem("username", username);
       set({
-        token: res.token,
-        username: decoded.sub,
+        username,
         isAuthenticated: true,
         loading: false,
         isHydrated: true,
@@ -66,34 +61,18 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: () => {
-    localStorage.removeItem("token");
     localStorage.removeItem("username");
-    set({ token: null, username: null, isAuthenticated: false });
+    set({ username: null, isAuthenticated: false });
   },
 
   hydrate: () => {
-    const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
 
-    if (!token || !username) {
+    if (!username) {
       set({ isHydrated: true });
       return;
     }
 
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      if (decoded.exp * 1000 > Date.now()) {
-        set({ token, username, isAuthenticated: true, isHydrated: true });
-      } else {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        set({ isHydrated: true });
-      }
-    } catch {
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      set({ isHydrated: true });
-    }
-
+    set({ username, isAuthenticated: true, isHydrated: true });
   },
 }));

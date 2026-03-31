@@ -12,7 +12,7 @@ export interface UserResponseDTO {
 }
 
 export interface AuthResponseDTO {
-  token: string;
+  // token removed
 }
 
 // ─── File DTOs ───────────────────────────────────────────────
