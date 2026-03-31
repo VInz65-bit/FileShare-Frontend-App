@@ -7,7 +7,7 @@ import { useFileStore } from "@/store/file-store";
 import { useToast } from "@/components/Toast";
 import FileCard from "@/components/FileCard";
 import UploadModal from "@/components/UploadModal";
-import { HiOutlinePlus, HiOutlineCloudUpload, HiOutlineUsers } from "react-icons/hi";
+import { HiOutlineCloudUpload } from "react-icons/hi";
 import type { FileUploadRequest } from "@/types";
 
 
@@ -17,21 +17,11 @@ export default function DashboardPage() {
   const { files, upload, update, remove, fetchFiles } = useFileStore();
   const { toast } = useToast();
 
-  const [uploadOpen, setUploadOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchFiles();
   }, [fetchFiles]);
-
-  const handleUpload = async (data: FileUploadRequest) => {
-    try {
-      const res = await upload(data);
-      toast(`✨ Successfully uploaded "${res.title}"`, "success");
-    } catch {
-      toast("Upload failed. File might be too large.", "error");
-    }
-  };
 
   const handleUpdate = async (data: FileUploadRequest) => {
     if (!editId) return;
@@ -71,18 +61,12 @@ export default function DashboardPage() {
         <div className="flex gap-3">
           <Link
             href="/register"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition-all border border-white/10 hover:border-emerald-500/30 cursor-pointer uppercase tracking-wider text-xs"
-          >
-            <HiOutlineUsers className="w-4 h-4 text-emerald-400" />
-            Manage Users
-          </Link>
-          <button
-            onClick={() => setUploadOpen(true)}
             className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold transition-all shadow-[0_4px_20px_-5px_rgba(16,185,129,0.4)] hover:scale-105 cursor-pointer uppercase tracking-wider text-xs"
           >
-            <HiOutlinePlus className="w-4 h-4" />
-            Upload New File
-          </button>
+            <HiOutlineCloudUpload className="w-4 h-4" />
+            File Upload
+          </Link>
+
         </div>
       </div>
 
@@ -98,13 +82,14 @@ export default function DashboardPage() {
           <p className="text-slate-500 max-w-sm mb-8">
             Upload your first file securely. We encrypt file metadata and handle your storage with care.
           </p>
-          <button
-            onClick={() => setUploadOpen(true)}
+          <Link
+            href="/register"
             className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold transition-colors border border-white/5 hover:border-emerald-500/30 cursor-pointer"
           >
-            <HiOutlinePlus className="w-4 h-4 text-emerald-400" />
+            <HiOutlineCloudUpload className="w-4 h-4 text-emerald-400" />
             Upload File
-          </button>
+          </Link>
+
         </div>
       )}
 
@@ -119,14 +104,6 @@ export default function DashboardPage() {
           />
         ))}
       </div>
-
-      {/* modals */}
-      <UploadModal
-        open={uploadOpen}
-        onClose={() => setUploadOpen(false)}
-        onSubmit={handleUpload}
-        mode="upload"
-      />
 
       <UploadModal
         open={!!editId}

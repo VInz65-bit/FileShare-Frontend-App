@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth-store";
 import { useToast } from "@/components/Toast";
-import { HiOutlineUserAdd } from "react-icons/hi";
+import { HiOutlineCloudUpload } from "react-icons/hi";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -19,10 +19,10 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       await register({ username, email, password });
-      toast("User registered successfully! 🚀", "success");
+      toast("File uploaded successfully! 🚀", "success");
       router.push("/dashboard");
     } catch {
-      toast("Registration failed — Username/Email might be taken.", "error");
+      toast("Upload failed — Please check your data.", "error");
     }
   };
 
@@ -36,56 +36,52 @@ export default function RegisterPage() {
         {/* icon */}
         <div className="flex justify-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center shadow-[0_0_30px_-5px_rgba(20,184,166,0.5)] border border-teal-300/30">
-            <HiOutlineUserAdd className="w-8 h-8 text-slate-950" />
+            <HiOutlineCloudUpload className="w-8 h-8 text-slate-950" />
           </div>
         </div>
 
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Register New User</h1>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-200 mb-2">Upload New File</h1>
           <p className="text-slate-400 text-sm">
-            Add a new member to the vault system
+            Add a new file entry to the secure vault
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Username</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">File Name</span>
             <input
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              pattern="^[a-zA-Z][a-zA-Z0-9_]{2,19}$"
-              title="Start with a letter, 3-20 chars, letters/numbers/underscores"
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="e.g. johndoe"
+              placeholder="e.g. project_draft.pdf"
             />
           </label>
 
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Email Address</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">File Type / Category</span>
             <input
               required
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="hello@example.com"
+              placeholder="e.g. Documentation"
             />
           </label>
 
           <label className="block relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Secure Password</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Download URL</span>
             <input
               required
-              type="password"
+              type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$"
-              title="8-20 characters with uppercase, lowercase, number, and special character"
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="••••••••"
+              placeholder="https://files.example.com/d/..."
             />
-            <p className="text-[10px] text-slate-500 mt-1.5 ml-1">Must contain an uppercase letter, number, & special character.</p>
+            <p className="text-[10px] text-slate-500 mt-1.5 ml-1">Securely share your file download location.</p>
           </label>
 
           <button
@@ -93,7 +89,7 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full py-4 mt-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 text-sm font-bold tracking-wide uppercase transition-all shadow-[0_4px_20px_-5px_rgba(20,184,166,0.4)] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed hover:scale-[1.02]"
           >
-            {loading ? "Registering..." : "Add User to Vault"}
+            {loading ? "Uploading..." : "Save File to Vault"}
           </button>
         </form>
       </div>
