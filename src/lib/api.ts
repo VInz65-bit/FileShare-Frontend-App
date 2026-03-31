@@ -16,31 +16,16 @@ const api = axios.create({
 });
 
 // ─── helpers ─────────────────────────────────────────────────
-function getToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("token");
-}
-
 function getUsername(): string | null {
   if (typeof window === "undefined") return null;
   return localStorage.getItem("username");
 }
 
 function authHeaders() {
-  const token = getToken();
   const username = getUsername();
-  const headers: Record<string, string> = {};
-
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  } else {
-    headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJndWVzdC11c2VyIiwibmFtZSI6Ikd1ZXN0IFVzZXIiLCJpYXQiOjE1MTYyMzkwMjJ9.dummy-signature`;
-  }
-
-  // Fix: username නැති නම් dummy username eka use කරන්න
-  headers["X-Logged-In-User"] = username ?? "guest-user";
-
-  return headers;
+  return {
+    "X-Logged-In-User": username ?? "guest-user",
+  };
 }
 
 // ─── Auth ────────────────────────────────────────────────────
