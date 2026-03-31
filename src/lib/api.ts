@@ -43,6 +43,13 @@ export async function loginUser(
   return res.data;
 }
 
+export async function getAllUsers(): Promise<UserResponseDTO[]> {
+  const res = await api.get<UserResponseDTO[]>("/api/v1/users", {
+    headers: authHeaders(),
+  });
+  return res.data;
+}
+
 // ─── Files ───────────────────────────────────────────────────
 export async function uploadFile(
   data: FileUploadRequest

@@ -19,10 +19,10 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       await register({ username, email, password });
-      toast("File uploaded successfully! 🚀", "success");
+      toast("Student saved successfully! 🎓", "success");
       router.push("/dashboard");
     } catch {
-      toast("Upload failed — Please check your data.", "error");
+      toast("Save failed — Please check your data.", "error");
     }
   };
 
@@ -75,11 +75,11 @@ export default function RegisterPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 block ml-1">Password</span>
             <input
               required
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-slate-950/50 border border-white/10 rounded-xl px-4 py-3.5 text-slate-100 text-sm placeholder-slate-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-inner"
-              placeholder="Enter Password"
+              placeholder="••••••••"
             />
             <p className="text-[10px] text-slate-500 mt-1.5 ml-1">Securely enter password.</p>
           </label>

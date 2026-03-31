@@ -4,6 +4,7 @@ import {
   updateFile,
   deleteFile as apiDeleteFile,
   getMyFiles,
+  getAllUsers,
 } from "@/lib/api";
 import type { FileDetailsDTO, FileResponseDTO, FileUploadRequest } from "@/types";
 
@@ -40,8 +41,26 @@ export const useFileStore = create<FileState>((set, get) => ({
   fetchFiles: async () => {
     set({ loading: true, error: null });
     try {
-      const data = await getMyFiles();
-      set({ files: data, loading: false });
+      // Fetch both files and students (users)
+      const [filesData, studentsData] = await Promise.all([
+        getMyFiles(),
+        getAllUsers().catch(() => []) // Fallback to empty if users endpoint fails
+      ]);
+
+      // Map students (users) to look like FileDetailsDTO for the Dashboard UI
+      const studentFiles: FileDetailsDTO[] = studentsData.map((s) => ({
+        shareId: s.id,
+        title: s.username,
+        description: `Student Email: ${s.email}`,
+        fileType: "application/student-profile",
+        owner: s.username,
+        previewUrl: "",
+        fileSize: 0,
+      }));
+
+      // Combine them (students first or files first?)
+      // Let's put students first as it's now a Student Portal
+      set({ files: [...studentFiles, ...filesData], loading: false });
     } catch {
       // stay silent and show empty list on error
       set({ files: [], loading: false });

@@ -27,7 +27,7 @@ export default function DashboardPage() {
     if (!editId) return;
     try {
       const res = await update(editId, data);
-      toast(`✨ Updated "${res.title}" successfully`, "success");
+      toast(`✨ Updated student "${res.title}" successfully`, "success");
       setEditId(null);
     } catch {
       toast("Update failed. Please try again.", "error");
@@ -50,12 +50,12 @@ export default function DashboardPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-6 bg-slate-900/40 p-8 rounded-3xl border border-white/5 backdrop-blur-md shadow-2xl relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 blur-[80px] -z-10 rounded-full group-hover:bg-emerald-500/20 transition-colors duration-700" />
         <div>
-          <h1 className="text-3xl font-extrabold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">Vault Dashboard</h1>
+          <h1 className="text-3xl font-extrabold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">Student Dashboard</h1>
           <p className="text-emerald-400 font-medium text-sm flex items-center gap-2">
             Welcome back  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           </p>
           <p className="text-slate-500 text-sm mt-2">
-            Managing <span className="text-slate-300 font-semibold">{files.length}</span> secure file{files.length !== 1 && "s"} in your vault
+            Managing <span className="text-slate-300 font-semibold">{files.length}</span> registered student{files.length !== 1 && "s"} 
           </p>
         </div>
         <div className="flex gap-3">
@@ -77,10 +77,10 @@ export default function DashboardPage() {
             <HiOutlineCloudUpload className="w-12 h-12 text-emerald-500/50" />
           </div>
           <h2 className="text-2xl font-bold text-slate-300 mb-3">
-            Your vault is empty
+            No students found
           </h2>
           <p className="text-slate-500 max-w-sm mb-8">
-            Upload your first file securely. We encrypt file metadata and handle your storage with care.
+            Start by adding a new student profile to your portal.
           </p>
           <Link
             href="/register"
