@@ -30,13 +30,16 @@ function authHeaders() {
   const token = getToken();
   const username = getUsername();
   const headers: Record<string, string> = {};
+
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   } else {
-    // Add dummy JWT token for testing
     headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJndWVzdC11c2VyIiwibmFtZSI6Ikd1ZXN0IFVzZXIiLCJpYXQiOjE1MTYyMzkwMjJ9.dummy-signature`;
   }
-  if (username) headers["X-Logged-In-User"] = username;
+
+  // Fix: username නැති නම් dummy username eka use කරන්න
+  headers["X-Logged-In-User"] = username ?? "guest-user";
+
   return headers;
 }
 
@@ -54,8 +57,6 @@ export async function loginUser(
   const res = await api.post<AuthResponseDTO>("/api/v1/users/login", data);
   return res.data;
 }
-
-
 
 // ─── Files ───────────────────────────────────────────────────
 export async function uploadFile(
@@ -114,8 +115,9 @@ export async function getFileDetails(
 }
 
 export function getPreviewUrl(shareId: string, download = false): string {
-  return `${API_BASE}/api/v1/files/preview/${shareId}${download ? "?download=true" : ""
-    }`;
+  return `${API_BASE}/api/v1/files/preview/${shareId}${
+    download ? "?download=true" : ""
+  }`;
 }
 
 export async function getMyFiles(): Promise<FileDetailsDTO[]> {
@@ -124,5 +126,3 @@ export async function getMyFiles(): Promise<FileDetailsDTO[]> {
   });
   return res.data;
 }
-
-
